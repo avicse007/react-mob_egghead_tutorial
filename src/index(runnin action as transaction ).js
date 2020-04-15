@@ -1,9 +1,13 @@
-import { observable, computed, action, transaction } from "mobx";
+import { observable, computed, action, transaction,configure } from "mobx";
 import { observer } from "mobx-react";
 import ReactDOM from "react-dom";
 import React from "react";
-//import  { devTools } from "mobx-devtools";
 import DevTools from "mobx-react-devtools";
+
+configure({
+  enforceActions: true
+});
+
 
 class Temprature {
   id = Math.random();
@@ -97,4 +101,24 @@ temps[0].setTempratureAndUnit('K',599);
 index.js:27 Calcculating temprature
 index.js:27 Calcculating celcius
 
+*/
+
 /*
+We should use configure to enable only action to change state 
+
+configure({
+  enforceActions: true
+});
+
+temps[0].unit = 'K';
+mobx.min.js:1 Uncaught Error: [mobx] An invariant failed, however the error is obfuscated because this is a production build.
+    at invariant (mobx.min.js:1)
+    at fail (mobx.min.js:1)
+    at checkIfStateModificationsAreAllowed (mobx.min.js:1)
+    at t.prepareNewValue (mobx.min.js:1)
+    at e.write (mobx.min.js:1)
+    at Temprature.set [as unit] (mobx.min.js:1)
+    at <anonymous>:1:15
+    
+
+
